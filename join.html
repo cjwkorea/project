@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./img/캡처1.PNG">
+    <title>SUBMIT</title>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+    />
+    <style>
+        body{
+            background-color: tomato;
+        }
+    </style>
+  </head>
+  <div class="container" style="width: 550px;">
+    <br />
+   
+    <div class="card bg-light" >
+      <article class="card-body mx-auto" >
+        <h4 class="card-title mt-3 text-center">Create Account</h4>
+
+        <form>
+          <div class="form-group input-group">
+            
+            <input
+              
+              name=""
+              id="id"
+              class="form-control"
+              placeholder="User Name"
+              for = "id"
+              type="text"
+              
+            />
+          
+          </div>
+          <!-- form-group// -->
+
+          <div class="form-group input-group">
+           
+            <input
+              class="form-control"
+              placeholder="Create password"
+              type="password"
+              id="pw"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group input-group">
+            
+            <input
+              class="form-control"
+              placeholder="Repeat password"
+              type="password"
+              id="pw2"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group">
+            <button
+            class="btn btn-danger btn-lg btn-block"
+            type="button"
+            onclick="requestJoin()"
+          >
+            SUBMIT
+          </button>
+          </div>
+          <!-- form-group// -->
+          <p class="text-center">Have an account? <a href="./login.html">Log In</a></p>
+        </form>
+        
+      </article>
+    </div>
+    <!-- card.// -->
+  </div>
+
+  <!--container end.//-->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Custom scripts -->
+  <script type="text/javascript">
+    const requestJoin = () => {
+      if (!validateFields()) {
+        return;
+      }
+
+      if (localStorage.getItem("userList") === null) {
+        localStorage.setItem("userList", JSON.stringify([]));
+      }
+
+      const userList = JSON.parse(localStorage.getItem("userList"));
+      const idElement = document.getElementById("id");
+      const pwElement = document.getElementById("pw");
+
+      if (userList.find((user) => user.id === idElement.value)) {
+        alert("이미 존재하는 아이디입니다.");
+        idElement.focus();
+        return;
+      }
+
+      const user = {
+        idx: userList.length + 1,
+        id: idElement.value,
+        pw: pwElement.value,
+      };
+
+      userList.push(user);
+
+      localStorage.setItem("userList", JSON.stringify(userList));
+
+      alert("회원가입이 완료되었습니다.");
+
+      location.href = "./login.html";
+    };
+
+    const validateFields = () => {
+      const idElement = document.getElementById("id");
+      const pwElement = document.getElementById("pw");
+      const pw2Element = document.getElementById("pw2");
+
+      if (idElement.value === "") {
+        alert("아이디를 입력해주세요.");
+        idElement.focus();
+        return false;
+      }
+
+      if (pwElement.value === "") {
+        alert("비밀번호를 입력해주세요.");
+        pwElement.focus();
+        return false;
+      }
+
+      if (pw2Element.value === "") {
+        alert("비밀번호 확인을 입력해주세요.");
+        pw2Element.focus();
+        return false;
+      }
+
+      if (pwElement.value !== pw2Element.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        pw2Element.focus();
+        return false;
+      }
+
+      return true;
+    };
+
+    const setJoinPage = () => {
+      const idElement = document.getElementById("id");
+      idElement.focus();
+    };
+
+    //   fetch("/api/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //     .then((res) => res.json())
+    //     .then((res) => {
+    //       if (res.success) {
+    //         alert("로그인 성공");
+    //         location.href = "/";
+    //       } else {
+    //         alert("로그인 실패");
+    //       }
+    //     });
+    // };
+  </script>
+  <script>
+    setJoinPage();
+  </script>
+</html>
