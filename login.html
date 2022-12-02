@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./img/캡처1.PNG">
+    <link rel="icon" href="./img/img.png">
     <title>LOGIN</title>
   </head>
   <body>
@@ -16,9 +16,14 @@
     />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container-fluid">
+      <a class="navbar-brand" href="./sc.html">Liverpool</a>
+      </nav>
     <!------ Include the above in your HEAD tag ---------->
     <div class="container" style="width: 550px;">
       <br />
+      
       <style>
         body{
             background-color: tomato;
@@ -124,6 +129,8 @@
       const loginUser = {
         idx: user.idx,
         id: user.id,
+        profileImg: user.profileImg,
+      
       };
 
       localStorage.setItem("loginUser", JSON.stringify(loginUser));
